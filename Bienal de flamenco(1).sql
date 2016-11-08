@@ -14,12 +14,12 @@ datosPersonales NVARCHAR (140) NOT NULL PRIMARY KEY
 , trabajo NVARCHAR (30) NOT NULL
 , datosPerfil NVARCHAR (60)
 , CIF char (9)
-, FOREIGN KEY (CIF) REFERENCES Empresa(CIF)
+, CONSTRAINT FK_CIF FOREIGN KEY (CIF) REFERENCES Empresa(CIF)
 )
 
 
 CREATE TABLE Espectaculo (
-nombreFechaHoraEspectaculo NVARCHAR (140) NOT NULL PRIMARY KEY
+CONSTRAINT nombreFechaHoraEspectaculo NVARCHAR (140) NOT NULL PRIMARY KEY
 )
 
 CREATE TABLE Espacio (
@@ -66,15 +66,31 @@ DNIRepresentante VARCHAR(9) NOT NULL PRIMARY KEY
 , otrosDatos NVARCHAR (140)
 )
 
--- Cómo se hace para poner una columna que sea PK y FK a la vez?
+-- Cómo se hace para poner una columna que sea PK y FK a la vez? Supongo que definiéndola primero como una y luego como otra
 CREATE TABLE Trabajador_espectaculo(
-datosPersonalesNombreFechaHoraEspectaculo 
+datosPersonalesNombreFechaHoraEspectaculo NVARCHAR (150) 
+,tareaAsignada 
 )
 
 CREATE TABLE Espectaculo_espacio (
-
+nombreEspacioNombreEspectáculoFechaHora
 )
 
 CREATE TABLE Espectáculo_responsable(
+DNINombreFechaHora
+)
+
+CREATE TABLE Representante_artista (
+DNIArtistaDNIRepresentante 
+)
+
+CREATE TABLE Numerada (
+NúmeroFilaZona
+
+)
+
+CREATE TABLE NoNumerada (
+espectáculoRecintoDiaHora
+
 
 )

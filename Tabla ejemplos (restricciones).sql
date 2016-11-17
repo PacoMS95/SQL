@@ -40,6 +40,7 @@ ID smallint IDENTITY (1,2) NOT NULL --Con identity no se permiten añadir más dat
 GO
 
 --2.	DatosRelacionados. Columnas:
+
 --a.	NombreRelacionado: Cadena de tamaño 15. Define una FK para relacionarla con la columna "Nombre” de la tabla DatosRestrictivos.
 --¿Deberíamos poner la misma restricción que en la columna correspondiente?
 --¿Qué ocurriría si la ponemos?
@@ -49,8 +50,13 @@ GO
 --d.	NumMasgrande: SmallInt. Valores comprendidos entre NumRarito y 1000. Definirlo como clave primaria.
 --¿Puede tener valores menores que 20?
 
+CREATE TABLE DatosRelacionados (
+NombreRelacionado nchar (15)
+, PalabraTabu nvarchar(20)
+, CONSTRAINT fk_NombreRelacionado FOREIGN KEY (NombreRelacionado) REFERENCES DatosRestrictivos (Nombre)
+, CONSTRAINT CK_PalabraTabu check (PalabraTabu like '[^Barcenas]' and PalabraTabu like '[^Gurtel]' and PalabraTabu like '[^Púnica]'and PalabraTabu like '[^Bankia]' and PalabraTabu like '[^sobre]' and PalabraTabu like '[%eo]')
 
-
+)
 GO
 
 --3.	DatosAlMogollon. Columnas:

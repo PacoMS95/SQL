@@ -1,4 +1,4 @@
-CREATE TABLE Ejemplos
+CREATE DATABASE Ejemplos
 GO
 USE Ejemplos
 GO
@@ -11,6 +11,7 @@ GO
 --e.	NumSuerte: TinyInt. Tiene que ser un número divisible por 3.
 --f.	Minutos: TinyInt Con valores comprendidos entre 20 y 85 o entre 120 y 185.
 
+-- PARA LA CONSTRAINT DE PRIMARY KEY:
 
 --CREATE TABLE table_name
 --( 
@@ -23,13 +24,18 @@ GO
 --RECUERDA: LAS RESTRICCIONES (CONSTRAINTS) SE ESCRIBEN AL FINAL
 
 CREATE TABLE DatosRestrictivos (
-ID smallint IDENTITY (1,2) NOT NULL
+ID smallint IDENTITY (1,2) NOT NULL --Con identity no se permiten añadir más datos
 , Nombre nvarchar(15)
 , Numpelos int
 , TipoRopa char(1) 
 , NumSuerte tinyint
+, Minutos tinyint
 , CONSTRAINT PK_ID PRIMARY KEY (ID)
 , CONSTRAINT CK_Nombre check (Nombre like '[^NX]%')
+, CONSTRAINT CK_Numpelos check (Numpelos like '[0 - 145000]')
+, CONSTRAINT CK_TipoRopa check (TipoRopa like '[CFEPBN]')
+, CONSTRAINT CK_NumSuerte check (NumSuerte % 3 = 0)
+, CONSTRAINT CK_Minutos check (Minutos BETWEEN 20 AND 85 OR Minutos BETWEEN 120 AND 185)
 )
 GO
 

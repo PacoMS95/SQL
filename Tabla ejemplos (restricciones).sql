@@ -55,7 +55,7 @@ NombreRelacionado nchar (15)
 , PalabraTabu nvarchar(20)
 , CONSTRAINT fk_NombreRelacionado FOREIGN KEY (NombreRelacionado) REFERENCES DatosRestrictivos (Nombre)
 , CONSTRAINT CK_PalabraTabu check (PalabraTabu like '[^Barcenas]' and PalabraTabu like '[^Gurtel]' and PalabraTabu like '[^Púnica]'and PalabraTabu like '[^Bankia]' and PalabraTabu like '[^sobre]' and PalabraTabu like '[%eo]')
-
+, 
 )
 GO
 
@@ -65,6 +65,5 @@ GO
 --c.	OtroNumero. Será mayor que el ID y Menor que LimiteSuperior. Poner UNIQUE
 --d.	NumeroQueVinoDelMasAlla: SmallInt FK relacionada con NumMasGrande de la tabla DatosRelacionados
 --e.	Etiqueta. Cadena de 3 caracteres. No puede tener los valores "pao”, "peo”, "pio” ni "puo”
-
 
 GO

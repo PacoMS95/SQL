@@ -51,11 +51,15 @@ GO
 --¿Puede tener valores menores que 20?
 
 CREATE TABLE DatosRelacionados (
-NombreRelacionado nchar (15)
+NombreRelacionado smallint 
 , PalabraTabu nvarchar(20)
-, CONSTRAINT fk_NombreRelacionado FOREIGN KEY (NombreRelacionado) REFERENCES DatosRestrictivos (Nombre)
+, NumRarito tinyint
+, NumMasGrande smallint
+, CONSTRAINT fk_NombreRelacionado FOREIGN KEY (NombreRelacionado) REFERENCES DatosRestrictivos (ID) -- Foreign key va siempre con Primary Key y tienen que ser del mismo tipo
 , CONSTRAINT CK_PalabraTabu check (PalabraTabu like '[^Barcenas]' and PalabraTabu like '[^Gurtel]' and PalabraTabu like '[^Púnica]'and PalabraTabu like '[^Bankia]' and PalabraTabu like '[^sobre]' and PalabraTabu like '[%eo]')
-, 
+, CONSTRAINT CK_NumRarito check (NumRarito < 20 and NumRarito not like '2' and NumRarito not like '3' and NumRarito not like '5' and NumRarito not like '7' and NumRarito not like '11'  and NumRarito not like '13'  and NumRarito not like '17'  and NumRarito not like '19')
+, CONSTRAINT CK_NumMasgrande check (NumMasgrande like '[NumRarito - 1000]')
+, CONSTRAINT PK_NumMasgrande PRIMARY KEY (NumMasgrande)
 )
 GO
 
@@ -66,4 +70,14 @@ GO
 --d.	NumeroQueVinoDelMasAlla: SmallInt FK relacionada con NumMasGrande de la tabla DatosRelacionados
 --e.	Etiqueta. Cadena de 3 caracteres. No puede tener los valores "pao”, "peo”, "pio” ni "puo”
 
+CREATE TABLE DatosAlMogollon (
+ID Smallint
+, LimiteSuperior smallint
+, OtroNumero smallint
+, CONSTRAINT fk_ID PRIMARY KEY (ID)
+, CONSTRAINT CK_ID check (ID % 5 = 0) 
+, CONSTRAINT UC_LimiteSuperior unique (LimiteSuperior)
+, CONSTRAINT CK_LimiteSuperior check (LimiteSuperior like '[1500-2000]')
+, CONSTRAINT UC_OtroNumero unique () --TE QUEDASTE POR AQUÍ
+) 
 GO

@@ -74,10 +74,15 @@ CREATE TABLE DatosAlMogollon (
 ID Smallint
 , LimiteSuperior smallint
 , OtroNumero smallint
+, NumeroQueVinoDelMasAlla smallint
+, Etiqueta nchar (3)
 , CONSTRAINT fk_ID PRIMARY KEY (ID)
 , CONSTRAINT CK_ID check (ID % 5 = 0) 
 , CONSTRAINT UC_LimiteSuperior unique (LimiteSuperior)
 , CONSTRAINT CK_LimiteSuperior check (LimiteSuperior like '[1500-2000]')
-, CONSTRAINT UC_OtroNumero unique () --TE QUEDASTE POR AQUÍ
+, CONSTRAINT CK_OtroNumero check (OtroNumero > ID and OtroNumero < LimiteSuperior)
+, CONSTRAINT UC_OtroNumero unique (OtroNumero)
+, CONSTRAINT FK_NumeroQueVinoDelMasAlla FOREIGN KEY (NumeroQueVinoDelMasAlla) REFERENCES DatosRelacionados (NumMasGrande)
+, CONSTRAINT CK_Etiqueta check (etiqueta like '[^pao]' and etiqueta like '[^peo]' and etiqueta like '[^pio]' and etiqueta like '[^puo]')
 ) 
 GO

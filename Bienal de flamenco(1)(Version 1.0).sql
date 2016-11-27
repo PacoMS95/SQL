@@ -23,20 +23,20 @@ CONSTRAINT nombreFechaHoraEspectaculo NVARCHAR (140) NOT NULL PRIMARY KEY
 )
 
 CREATE TABLE Espacio (
-nombre NVARCHAR (30) NOT NULL PRIMARY KEY
+nombre NVARCHAR (30) PRIMARY KEY
 , direccion NVARCHAR (50) NOT NULL
 , tipo NVARCHAR (20) NOT NULL
 , aforo SMALLINT NOT NULL
 )
 
 CREATE TABLE EntradaOLocalidad (
-espectaculoRecintoDiaHora NVARCHAR (140) NOT NULL PRIMARY KEY
+espectaculoRecintoDiaHora NVARCHAR (140) PRIMARY KEY
 , nombreFechaHoraEspectaculo NVARCHAR (140) NOT NULL
 , FOREIGN KEY (nombreFechaHoraEspectaculo) REFERENCES Espectaculo(nombreFechaHoraEspectaculo)
 )
 
 CREATE TABLE Zona (
-IDZona SMALLINT NOT NULL PRIMARY KEY
+IDZona SMALLINT PRIMARY KEY
 , espectaculoRecintoDiaHora NVARCHAR (140) NOT NULL
 , FOREIGN KEY (espectaculoRecintoDiaHora) REFERENCES EntradaOLocalidad(espectaculoRecintoDiaHora)
 )
@@ -46,23 +46,23 @@ IDZona SMALLINT NOT NULL PRIMARY KEY
 -- RESPUESTA: se ejecuta pasito a pasito y tienes que ponerlas en orden
 
 CREATE TABLE Fila (
-IDFila SMALLINT NOT NULL PRIMARY KEY
+IDFila SMALLINT PRIMARY KEY
 , IDZona SMALLINT NOT NULL
 , FOREIGN KEY (IDZona) REFERENCES Zona (IDZona)
 )
 
 CREATE TABLE Responsable (
-DNIResponsable VARCHAR(9) NOT NULL PRIMARY KEY
+DNIResponsable VARCHAR(9) PRIMARY KEY
 , tareaAsignada NVARCHAR (140) NOT NULL
 )
 
 CREATE TABLE Artista (
-DNIArtista VARCHAR(9) NOT NULL PRIMARY KEY
+DNIArtista VARCHAR(9) PRIMARY KEY
 , trabajo NVARCHAR (50)
 )
 
 CREATE TABLE Representante (
-DNIRepresentante VARCHAR(9) NOT NULL PRIMARY KEY
+DNIRepresentante VARCHAR(9) PRIMARY KEY
 , otrosDatos NVARCHAR (140)
 )
 

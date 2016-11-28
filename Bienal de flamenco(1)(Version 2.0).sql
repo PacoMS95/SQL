@@ -19,7 +19,7 @@ datosPersonales NVARCHAR (140)
 , trabajo NVARCHAR (50) NOT NULL
 , datosPerfil NVARCHAR (60)
 , CIF char(9)
-, CONSTRAINT FK_CIF FOREIGN KEY (CIF) REFERENCES Empresa(CIF)
+, CONSTRAINT FK_CIF FOREIGN KEY (CIF) REFERENCES Empresa(CIF) on delete no action on update cascade
 , CONSTRAINT PK_DatosPersonales PRIMARY KEY (datosPersonales)
 )
 
@@ -39,13 +39,12 @@ nombre NVARCHAR (30)
 , aforo SMALLINT NOT NULL
 , CONSTRAINT PK_nombre PRIMARY KEY (nombre)
 )
-
 GO
 -- EntradaOLocalidad --
 CREATE TABLE EntradaOLocalidad (
 espectaculoRecintoDiaHora NVARCHAR (140)
 , nombreFechaHoraEspectaculo NVARCHAR (140) NOT NULL
-, CONSTRAINT FK_nombreFechaHoraEspectaculo FOREIGN KEY (nombreFechaHoraEspectaculo) REFERENCES Espectaculo (nombreFechaHoraEspectaculo)
+, CONSTRAINT FK_nombreFechaHoraEspectaculo FOREIGN KEY (nombreFechaHoraEspectaculo) REFERENCES Espectaculo (nombreFechaHoraEspectaculo) on delete no action on update cascade
 , CONSTRAINT PK_espectaculoRecintoDiaHora PRIMARY KEY (espectaculoRecintoDiaHora)
 )
 
@@ -54,7 +53,7 @@ GO
 CREATE TABLE Zona (
 IDZona SMALLINT
 , espectaculoRecintoDiaHora NVARCHAR (140) NOT NULL
-, CONSTRAINT FK_espectaculoRecintoDiaHora FOREIGN KEY (espectaculoRecintoDiaHora) REFERENCES EntradaOLocalidad(espectaculoRecintoDiaHora)
+, CONSTRAINT FK_espectaculoRecintoDiaHora FOREIGN KEY (espectaculoRecintoDiaHora) REFERENCES EntradaOLocalidad(espectaculoRecintoDiaHora) on delete no action on update cascade
 , CONSTRAINT PK_IDZona PRIMARY KEY (IDZona)
 )
 
@@ -71,33 +70,40 @@ GO
 CREATE TABLE Responsable (
 DNIResponsable VARCHAR(9)
 , tareaAsignada NVARCHAR (140) NOT NULL
-, 
+, CONSTRAINT PK_DNIResponsable PRIMARY KEY (DNIResponsable)
 )
 
 GO
 -- Artista --
 CREATE TABLE Artista (
-DNIArtista VARCHAR(9) PRIMARY KEY
+DNIArtista VARCHAR(9)
 , trabajo NVARCHAR (50)
+, CONSTRAINT PK_DNIArtista PRIMARY KEY (DNIArtista)
 )
 
 GO
 -- Representante --
 CREATE TABLE Representante (
-DNIRepresentante VARCHAR(9) PRIMARY KEY
+DNIRepresentante VARCHAR(9)
 , otrosDatos NVARCHAR (140)
+, CONSTRAINT PK_DNIRepresentante PRIMARY KEY (DNIRepresentante)
 )
 
 GO
--- Trabajador_espectaculo
+-- Trabajador_espectaculo --
 CREATE TABLE Trabajador_espectaculo (
-datosPersonalesNombreFechaHoraEspectaculo
+datosPersonalesNombreFechaHoraEspectaculo NVARCHAR(200)
+, tareaAsignada NVARCHAR (50)
+, CONSTRAINT PK_datosPersonalesNombreFechaHoraEspectaculo PRIMARY KEY (datosPersonalesNombreFechaHoraEspectaculo)
+, CONSTRAINT FK_datosPersonalesNombreFechaHoraEspectaculo FOREIGN KEY (datosPersonalesNombreFechaHoraEspectaculo) REFERENCES ??? (???)
 )
 
 GO
 -- Espectaculo_espacio --
-CREATE TABLE Espectaculo_espacio
-
+CREATE TABLE Espectaculo_espacio(
+nombreEspacioNombreEspectáculoFechaHora NVARCHAR(200)
+, CONSTRAINT 
+)
 GO
 -- Representante_artista --
 CREATE TABLE Representante_artista

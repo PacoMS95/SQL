@@ -92,17 +92,20 @@ DNIRepresentante VARCHAR(9)
 GO
 -- Trabajador_espectaculo --
 CREATE TABLE Trabajador_espectaculo (
-datosPersonalesNombreFechaHoraEspectaculo NVARCHAR(200)
+datosPersonales NVARCHAR (140)
+, nombreFechaHoraEspectaculo NVARCHAR(140)
 , tareaAsignada NVARCHAR (50)
-, CONSTRAINT PK_datosPersonalesNombreFechaHoraEspectaculo PRIMARY KEY (datosPersonalesNombreFechaHoraEspectaculo)
-, CONSTRAINT FK_datosPersonalesNombreFechaHoraEspectaculo FOREIGN KEY (datosPersonalesNombreFechaHoraEspectaculo) REFERENCES ??? (???)
+, CONSTRAINT PK_datosPersonalesNombreFechaHoraEspectaculo PRIMARY KEY (datosPersonales,NombreFechaHoraEspectaculo)
+, CONSTRAINT FK_datosPersonales FOREIGN KEY (datosPersonales) REFERENCES Trabajador(datosPersonales)
+, CONSTRAINT FK_nombreFechaHoraEspectaculo FOREIGN KEY (nombreFechaHoraEspectaculo) REFERENCES Espectaculo (nombreFechaHoraEspectaculo)
 )
 
 GO
 -- Espectaculo_espacio --
 CREATE TABLE Espectaculo_espacio(
-nombreEspacioNombreEspectáculoFechaHora NVARCHAR(200)
-, CONSTRAINT 
+nombreEspacio NVARCHAR ()
+,nombreFechaHoraEspectaculo NVARCHAR(200)
+, 
 )
 GO
 -- Representante_artista --

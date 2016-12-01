@@ -82,9 +82,9 @@ go
 --1. La edad de un jugador no puede ser inferior a quince años ni superior a cincuenta. 
 	
 --ALTER TABLE LBA_Jugadores ADD CONSTRAINT CK_Edad_Jugador check ((CURRENT_TIMESTAMP - FechaNac) >  15 and (CURRENT_TIMESTAMP - FechaNac) <  50)
--- La dejo en comentario porque CURRENT_TIMESTAMP está en smalldatetime y FechaNac está en date. Hay que hacer casteo
+-- La dejo en comentario porque CURRENT_TIMESTAMP está en smalldatetime y FechaNac está en date. Hay que hacer casteo así:
 
-ALTER TABLE LBA_Jugadores ADD CONSTRAINT CK_Edad_Jugador check (YEAR())
+ALTER TABLE LBA_Jugadores ADD CONSTRAINT CK_Edad_Jugador check (YEAR()) -- en construcción
 
 --2. Crea una restricción en la tabla LBA_Jugadores para asegurarte que el dorsal está comprendido entre 0 y 99 y otra para asegurarte que el valor de la posición es válido. Los valores válidos son B, A, P, E y L. 
 

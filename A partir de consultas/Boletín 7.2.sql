@@ -44,11 +44,13 @@ select au_fname, au_lname, address, city,state, zip from authors where state not
 select au_fname, au_lname, address, city, state, zip from authors where au_lname like 'D%' or au_lname like 'G%' or au_lname like 'S%'
 
 --    ID, nivel y nombre completo de todos los empleados con un nivel inferior a 100, ordenado alfabéticamente
+select emp_id, job_lvl, lname, fname from employee where job_lvl < 100 order by lname asc
 
 --Modificaciones de datos
 
 --    Inserta un nuevo autor.
-
+select * from authors
+insert into authors (au_id, au_lname, au_fname ,phone, address, city, state, zip, contract) values (923-92-9929, 'De Los Palotes', 'Pepito', 987654321, 'Calle melancolía','Sevilla', 'AL', 41701, 0)
 --    Inserta dos libros, escritos por el autor que has insertado antes y publicados por la editorial "Ramona publishers”.
 
 --    Modifica la tabla jobs para que el nivel mínimo sea 90.

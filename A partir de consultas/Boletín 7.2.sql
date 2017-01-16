@@ -49,10 +49,15 @@ select emp_id, job_lvl, lname, fname from employee where job_lvl < 100 order by 
 --Modificaciones de datos
 
 --    Inserta un nuevo autor.
-select * from authors
-insert into authors (au_id, au_lname, au_fname ,phone, address, city, state, zip, contract) values (923-92-9929, 'De Los Palotes', 'Pepito', 987654321, 'Calle melancolía','Sevilla', 'AL', 41701, 0)
+BEGIN TRANSACTION
+INSERT INTO authors (au_id,au_lname,au_fname,phone,address,city,state,zip,contract) VALUES ('172-32-1177','Esteban','Belén','666666666','Calle Nieve', 'San Jose', 'CA','95128','true')
+COMMIT
 --    Inserta dos libros, escritos por el autor que has insertado antes y publicados por la editorial "Ramona publishers”.
+select * from titles
 
+begin transaction
+insert into titles (title_id, title, type, pub_id, price, advance, royalty, ytd_sales, notes, pubdate) values ('TW6666','Penesideral', 'no', 123423, 55, 8999, NULL, 2987, 'me aburro mucho', CURRENT_TIMESTAMP )
+commit transaction
 --    Modifica la tabla jobs para que el nivel mínimo sea 90.
 
 --    Crea una nueva editorial (publihers) con ID 9908, nombre Mostachon Books y sede en Utrera.

@@ -26,25 +26,22 @@ select ProductID, max (UnitPrice) as [Precio unitario], sum(UnitPrice * Quantity
 
 --6. ID del proveedor e importe total del stock acumulado de productos correspondientes a ese proveedor.
 
-select * from Orders
-
-select SupplierID from Suppliers
+select SupplierID, sum(UnitPrice*UnitsInStock) from Products group by SupplierID
 
 --7. Número de pedidos registrados mes a mes de cada año.
 
-
+select count(OrderID) as [numero de pedidos], MONTH(OrderDate) as [mes del año], year(OrderDate) as año from Orders group by MONTH(OrderDate), year(OrderDate) order by year(OrderDate) asc
 
 --8. Año y tiempo medio transcurrido entre la fecha de cada pedido (OrderDate) y la fecha en la que lo hemos enviado (ShipDate), en días para cada año.
 
+select year(OrderDate) as [año de envío], avg(datediff(DAY, OrderDate,ShippedDate)) as [Diferencias en días (media) entre pedido y envío] from Orders group by year(OrderDate)
 
+--todo tiene que aparecer en group by o ser una función de agregado
 
 --9. ID del distribuidor y número de pedidos enviados a través de ese distribuidor.
 
-
-
-
+select SupplierID, count(UnitsOnOrder) [Conteo de unidades pedidas] from Products group by SupplierID
 
 --10. ID de cada proveedor y número de productos distintos que nos suministra.
 
-
-
+select count(ProductName) as [numero de productos distintos] ,SupplierID from Products group by SupplierID

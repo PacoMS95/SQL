@@ -18,30 +18,23 @@ select CustomerID, count(OrderID) as numeroDePedidos from Orders group by Custom
 
 --4. ID del cliente, año y número de pedidos que nos ha hecho cada año.
 
-
-
+select CustomerID,  year(OrderDate), count(OrderID) from Orders group by CustomerID, year(OrderDate)
 
 --5. ID del producto, precio unitario y total facturado de ese producto, ordenado por cantidad facturada de mayor a menor. Si hay varios precios unitarios para el mismo producto tomaremos el mayor.
 
-
-
-
+select ProductID, max (UnitPrice) as [Precio unitario], sum(UnitPrice * Quantity) as [total facturado] from [Order Details] group by ProductID order by [total facturado] desc
 
 --6. ID del proveedor e importe total del stock acumulado de productos correspondientes a ese proveedor.
 
+select * from Orders
 
-
-
+select SupplierID from Suppliers
 
 --7. Número de pedidos registrados mes a mes de cada año.
 
 
 
-
-
 --8. Año y tiempo medio transcurrido entre la fecha de cada pedido (OrderDate) y la fecha en la que lo hemos enviado (ShipDate), en días para cada año.
-
-
 
 
 

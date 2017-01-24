@@ -6,15 +6,15 @@ use Northwind
 go
 --1. Nombre del país y número de clientes de cada país, ordenados alfabéticamente por el nombre del país.
 select country, count (CustomerID) as numeroclientes from Customers group by Country order By Country asc
+-- si pusiésemos * en "CustomerID" daría igual porque CustomerID es la PK y no tiene valores NULL
 
 --2. ID de producto y número de unidades vendidas de cada producto
-select ProductID, count(Quantity) as cantidad from [Order Details] group by ProductID
-
+select ProductID, sum(Quantity) as cantidad from [Order Details] group by ProductID
+-- en un principio pusiste count, no sum. Tenemos que arrastrar todas las ventas, no solo contar las diferentes
 
 --3. ID del cliente y número de pedidos que nos ha hecho.
 
 select CustomerID, count(OrderID) as numeroDePedidos from Orders group by CustomerID
-
 
 --4. ID del cliente, año y número de pedidos que nos ha hecho cada año.
 
@@ -44,4 +44,7 @@ select SupplierID, count(UnitsOnOrder) [Conteo de unidades pedidas] from Product
 
 --10. ID de cada proveedor y número de productos distintos que nos suministra.
 
-select count(ProductName) as [numero de productos distintos] ,SupplierID from Products group by SupplierID
+select count(ProductID) as [numero de productos distintos] ,SupplierID from Products group by SupplierID
+
+--Aquí pasa lo mismo que antes: poner un * en el count es lo mismo que lo que has puesto, puesto que ProductID es la PK. En caso de que no nos pidan la PK, habría que poner 
+-- un distinct delante del count

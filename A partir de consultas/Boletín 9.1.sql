@@ -5,6 +5,8 @@ use Northwind
 go
 --    Nombre de los proveedores y número de productos que nos vende cada uno
 
+
+
 --    Nombre completo y telefono de los vendedores que trabajen en New York, Seattle, Vermont, Columbia, Los Angeles, Redmond o Atlanta.
 
 --    Número de productos de cada categoría y nombre de la categoría.

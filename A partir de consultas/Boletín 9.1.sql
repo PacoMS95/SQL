@@ -5,13 +5,19 @@ use Northwind
 go
 --    Nombre de los proveedores y número de productos que nos vende cada uno
 
-
-
+select CompanyName, count(ProductID) as [Numero de productos que vende cada uno] from dbo.Suppliers as S inner join dbo.Products as P on S.SupplierID=P.SupplierID group by CompanyName
+ 
 --    Nombre completo y telefono de los vendedores que trabajen en New York, Seattle, Vermont, Columbia, Los Angeles, Redmond o Atlanta.
+
+select LastName, FirstName, HomePhone, City from Employees where City in ('New York', 'Seattle', 'Vermot', 'Columbia', 'Los Angeles', 'Redmond', 'Atlanta')
 
 --    Número de productos de cada categoría y nombre de la categoría.
 
+
+
 --    Nombre de la compañía de todos los clientes que hayan comprado queso de cabrales o tofu.
+
+
 
 --    Empleados (ID, nombre, apellidos y teléfono) que han vendido algo a Bon app' o Meter Franken.
 

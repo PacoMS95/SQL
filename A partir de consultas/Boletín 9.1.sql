@@ -5,11 +5,20 @@ use Northwind
 go
 --    Nombre de los proveedores y número de productos que nos vende cada uno
 
-select CompanyName, count(ProductID) as [Numero de productos que vende cada uno] from dbo.Suppliers as S inner join dbo.Products as P on S.SupplierID=P.SupplierID group by CompanyName
- 
+
+--select S.CompanyName, P.ProductName from Suppliers as S inner join Products as P on S.SupplierID = P.SupplierID 
+
+
+select S.CompanyName, count(P.ProductName) as [numero de productos] from Suppliers as S inner join Products as P on S.SupplierID = P.SupplierID group by S.CompanyName
+-- Numero de products por nombre de categoría
+
+select CategoryName, count(ProductID) from Products as P inner join Categories as C on C.CategoryID = P.CategoryID group by CategoryName
 --    Nombre completo y telefono de los vendedores que trabajen en New York, Seattle, Vermont, Columbia, Los Angeles, Redmond o Atlanta.
 
-select LastName, FirstName, HomePhone, City from Employees where City in ('New York', 'Seattle', 'Vermot', 'Columbia', 'Los Angeles', 'Redmond', 'Atlanta')
+select City, LastName, FirstName, HomePhone from Employees where City like 'New York' or City like 'Seattle' or City like 'Vermont' or City like 'Columbia' or City like 'Los Angeles' or City like 'Redmond' or City like 'Atlanta'
+-- más simple con IN
+
+select City, LastName, FirstName, HomePhone from Employees where City in ('New York', 'Seattle', 'Vermont', 'Columbia' , 'Los Angeles' , 'Redmond' , 'Atlanta')
 
 --    Número de productos de cada categoría y nombre de la categoría.
 

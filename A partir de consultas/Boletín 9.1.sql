@@ -23,15 +23,23 @@ select City, LastName, FirstName, HomePhone from Employees where City in ('New Y
 --    Número de productos de cada categoría y nombre de la categoría.
 
 
+select count(ProductID) as [numero de productos], CategoryName from Products as P  inner join Categories as C on P.CategoryID = C.CategoryID group by CategoryName;
+
 
 --    Nombre de la compañía de todos los clientes que hayan comprado queso de cabrales o tofu.
 
+select CompanyName as [nombre de la compañía] from Suppliers as S inner join Products as P on S.SupplierID = P.SupplierID where ProductName in ('Tofu', 'Queso Cabrales')
 
 
---    Empleados (ID, nombre, apellidos y teléfono) que han vendido algo a Bon app' o Meter Franken.
+--    Empleados (ID, nombre, apellidos y teléfono) que han vendido algo a Bon app' o Meter Franken. -- ESTE SE HACE CONCATENANDO INNER JOINS. PUEDES HACERLO DE ARRIBA ABAJO O AL REVÉS, YA DEPENDE DE COMO TE GUSTE MÁS
+
+select E.EmployeeID, FirstName, LastName, HomePhone from Employees as E inner join Orders as O on E.EmployeeID = O.EmployeeID inner join Customers as C on O.CustomerID = C.CustomerID where CompanyName like 'bon%' OR CompanyName like 'Meter Franken'
+
+-- lo suyo es que uses distinct después del select, porque si te das cuentas se repiten los empleados. No está del todo mal, pero tú sabes.
 
 --    Empleados (ID, nombre, apellidos, mes y día de su cumpleaños) que no han vendido nunca nada a ningún cliente de Francia. *
 
+select * from Categories
 --    Total de ventas en US$ de productos de cada categoría (nombre de la categoría).
 
 --    Total de ventas en US$ de cada empleado cada año (nombre, apellidos, dirección).

@@ -45,18 +45,39 @@ select CustomerID from Customers where Country in ('France') except select Emplo
 
 --    Total de dinero en ventas de productos de cada categoría (nombre de la categoría).
 
-select (UnitPrice * UnitsOnOrder) as [Total recaudado con productos], CategoryName from Products as P inner join Categories as C on P.CategoryID = C.CategoryID
+--select (UnitPrice * UnitsOnOrder) as [Total recaudado con productos], CategoryName from Products as P inner join Categories as C on P.CategoryID = C.CategoryID
+
+
 
 --    Total de dinero en ventas de cada empleado cada año (nombre, apellidos, dirección).
 
 
 
+
+
 --    Ventas de cada producto en el año 97. Nombre del producto y unidades.
+
+
+
+
 
 --    Cuál es el producto del que hemos vendido más unidades en cada país. *
 
+
+
 --    Empleados (nombre y apellidos) que trabajan a las órdenes de Andrew Fuller.
+
+
+
+
 
 --    Número de subordinados que tiene cada empleado, incluyendo los que no tienen ninguno. Nombre, apellidos, ID.
 
+
+
+
+
 --* Se necesitan subconsultas
+
+
+

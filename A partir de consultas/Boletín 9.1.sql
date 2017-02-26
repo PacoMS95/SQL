@@ -6,6 +6,7 @@ go
 --    Nombre de los proveedores y número de productos que nos vende cada uno
 
 
+
 --select S.CompanyName, P.ProductName from Suppliers as S inner join Products as P on S.SupplierID = P.SupplierID 
 
 
@@ -38,25 +39,32 @@ select E.EmployeeID, FirstName, LastName, HomePhone from Employees as E inner jo
 
 --    Empleados (ID, nombre, apellidos, mes y día de su cumpleaños) que no han vendido nunca nada a ningún cliente de Francia. (NO HACE FALTA SUBCONSULTAS AUNQUE EN EL ENUNCIADO ORIGINAL SÍ LA PEDÍAN)
 
-
-
 select CustomerID from Customers where Country in ('France') except select EmployeeID,LastName,FirstName, MONTH(BirthDate) as mesDeNacimiento, day(BirthDate) from Employees
 
+--    Total de dinero en ventas de productos de cada categoría (nombre de la categoría). 
+--> Traducido a tu idioma: la suma del dinero obtenido en todas las ventas ordenadas por nombre de categoría
 
---    Total de dinero en ventas de productos de cada categoría (nombre de la categoría).
+select sum(UnitPrice * UnitsOnOrder) as [Total recaudado con productos], CategoryName from Products as P inner join Categories as C on P.CategoryID = C.CategoryID group by CategoryName
 
-select (UnitPrice * UnitsOnOrder) as [Total recaudado con productos], CategoryName from Products as P inner join Categories as C on P.CategoryID = C.CategoryID
 
 --    Total de dinero en ventas de cada empleado cada año (nombre, apellidos, dirección).
+--> Traducido: la suma del dinero obtenido por cada empleado, mostrándose su nombre, apellidos y su dirección
 
+-- Como hay tres tablas que relacionar pero, como no se hace con subconsultas, se opta por un inner join doble. El segundo inner join se coloca literalmente después del primer inner join.
 
-
+select sum(UnitPrice*Quantity*100*Discount)as Dinero, LastName, FirstName, Address from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID inner join Employees as E on O.EmployeeID = E.EmployeeID group by LastName, Address, FirstName
 --    Ventas de cada producto en el año 97. Nombre del producto y unidades.
 
+
+
 --    Cuál es el producto del que hemos vendido más unidades en cada país. *
+
 
 --    Empleados (nombre y apellidos) que trabajan a las órdenes de Andrew Fuller.
 
 --    Número de subordinados que tiene cada empleado, incluyendo los que no tienen ninguno. Nombre, apellidos, ID.
+
+
+
 
 --* Se necesitan subconsultas

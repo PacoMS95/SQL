@@ -57,16 +57,13 @@ select sum(UnitPrice * UnitsOnOrder) as [Total recaudado con productos], Categor
 
 select sum(UnitPrice*Quantity*100*Discount)as Dinero, LastName, FirstName, Address from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID inner join Employees as E on O.EmployeeID = E.EmployeeID group by LastName, Address, FirstName
 
---    Ventas de cada producto en el año 97. Nombre del producto y unidades.
+--    Ventas de cada producto en el año 97. Nombre del producto y unidades
 
 
 
 --    Cuál es el producto del que hemos vendido más unidades en cada país. *
 
-
---    Cuál es el producto del que hemos vendido más unidades en cada país. *
-
-
+select max() from 
 
 --    Empleados (nombre y apellidos) que trabajan a las órdenes de Andrew Fuller.
 

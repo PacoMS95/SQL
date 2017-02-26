@@ -46,41 +46,28 @@ select CustomerID from Customers where Country in ('France') except select Emplo
 
 select sum(UnitPrice * UnitsOnOrder) as [Total recaudado con productos], CategoryName from Products as P inner join Categories as C on P.CategoryID = C.CategoryID group by CategoryName
 
-<<<<<<< HEAD
-=======
+
 --select (UnitPrice * UnitsOnOrder) as [Total recaudado con productos], CategoryName from Products as P inner join Categories as C on P.CategoryID = C.CategoryID
 
-
->>>>>>> origin/master
 
 --    Total de dinero en ventas de cada empleado cada año (nombre, apellidos, dirección).
 --> Traducido: la suma del dinero obtenido por cada empleado, mostrándose su nombre, apellidos y su dirección
 
 -- Como hay tres tablas que relacionar pero, como no se hace con subconsultas, se opta por un inner join doble. El segundo inner join se coloca literalmente después del primer inner join.
 
-<<<<<<< HEAD
 select sum(UnitPrice*Quantity*100*Discount)as Dinero, LastName, FirstName, Address from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID inner join Employees as E on O.EmployeeID = E.EmployeeID group by LastName, Address, FirstName
-=======
 
-
-
->>>>>>> origin/master
 --    Ventas de cada producto en el año 97. Nombre del producto y unidades.
 
 
 
-<<<<<<< HEAD
 --    Cuál es el producto del que hemos vendido más unidades en cada país. *
-
-
-=======
 
 
 --    Cuál es el producto del que hemos vendido más unidades en cada país. *
 
 
 
->>>>>>> origin/master
 --    Empleados (nombre y apellidos) que trabajan a las órdenes de Andrew Fuller.
 
 
@@ -91,13 +78,4 @@ select sum(UnitPrice*Quantity*100*Discount)as Dinero, LastName, FirstName, Addre
 
 
 
-
-<<<<<<< HEAD
 --* Se necesitan subconsultas
-=======
-
---* Se necesitan subconsultas
-
-
-
->>>>>>> origin/master

@@ -36,8 +36,7 @@ select title, price, title_id from titles where type in ('psychology','business'
 
 --    Nombre completo (nombre y apellido) y dirección completa de todos los autores que no viven en California ni en Oregón.
 
-select au_fname, au_lname, address, city,state, zip from authors where state not in ('CA','OR')
-
+select au_fname, au_lname, address, city,state, zip from authors where state not in ('CA','OR') -- Importante: has intentado not in 'CA' and not in 'OR', pero por lo visto hay que hacerlo así
 
 --    Nombre completo y dirección completa de todos los autores cuyo apellido empieza por D, G o S.
 
@@ -56,10 +55,12 @@ COMMIT
 select * from titles
 
 begin transaction
-insert into titles (title_id, title, type, pub_id, price, advance, royalty, ytd_sales, notes, pubdate) values ('TW6666','Penesideral', 'no', 123423, 55, 8999, NULL, 2987, 'me aburro mucho', CURRENT_TIMESTAMP )
+insert into titles (title_id, title, type, pub_id, price, advance, royalty, ytd_sales, notes, pubdate) values ('TW6666','Confesiones', 'no', 123423, 55, 8999, NULL, 2987, 'me aburro mucho', CURRENT_TIMESTAMP )
 commit transaction
---    Modifica la tabla jobs para que el nivel mínimo sea 90.
 
+--    Modifica la tabla jobs para que el nivel mínimo sea 90.
+alter table jobs with nocheck add constraint CK_nivelMinimo90 check (min_lvl > 90)
 --    Crea una nueva editorial (publihers) con ID 9908, nombre Mostachon Books y sede en Utrera.
 
 --    Cambia el nombre de la editorial con sede en Alemania para que se llame "Machen Wücher" y traslasde su sede a Stuttgart
+

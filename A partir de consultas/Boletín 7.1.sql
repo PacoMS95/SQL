@@ -39,9 +39,16 @@ select ProductName, UnitsInStock, (UnitsInStock * UnitPrice) as precioStock from
 select CompanyName, ContactName, Address, City, Country from Customers where Country != 'USA' or Country != 'Mexico' or Country != 'Canada' and ContactTitle != 'Owner'
 
 -- A PARTIR DE AQUÍ SE USAN FUNCIONES DE AGREGADO
+
 --8. ID del cliente y número de pedidos realizados por cada cliente, ordenado de mayor a
 --menor número de pedidos.
 
+select CustomerID, count(OrderID) as NumeroPedidos from Orders group by CustomerID order by NumeroPedidos desc
+
 --9. Número de pedidos enviados a cada ciudad, incluyendo el nombre de la ciudad.
 
+select ShipCity, count(OrderID) as [Numero de pedidos por ciudad] from Orders group by ShipCity
+
 --10. Número de productos de cada categoría.
+
+select CategoryID, count(CategoryID) as [Numero de productos de cada categoría] from Products group by CategoryID

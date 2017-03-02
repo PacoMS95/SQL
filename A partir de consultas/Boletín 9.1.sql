@@ -62,9 +62,50 @@ select sum(UnitPrice*Quantity*100*Discount)as Dinero, LastName, FirstName, Addre
 
 
 --    Cuál es el producto del que hemos vendido más unidades en cada país. *
+-- Cuál es la cantidad de productos que se han vendido 
 
-select max() from 
+select P.ProductID from Products as P 
 
+select ProductID, sum(Quantity) as CantidadVendida from [Order Details] group by ProductID order by ProductID
+
+-- Buscamos las máximas ventas por cada país.
+
+select max([Order Details].Quantity) from [Order Details]
+
+-- Las ventas de cada país
+select OD.ProductID, sum(OD.Quantity) as CantidadVendida, O.ShipCountry from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID where ProductID = 1 group by OD.ProductID, O.ShipCountry order by ProductID 
+
+select max(select sum(OD.Quantity) from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID group by OD.ProductID, O.ShipCountry order by ProductID as ventaPorPais) from ventaPorPais
+
+
+
+
+--select ProductID, Quantity from [Order Details] where ProductID = 51
+
+select OD.ProductID, sum(OD.Quantity) as CantidadVendida, O.ShipCountry from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID where OD.ProductID = 1 group by OD.ProductID, O.ShipCountry order by ProductID
+
+SELECT P.ProductID, P.ProductName FROM Products as P
+
+
+
+SELECT P.ProductName, (select OD.ProductID, sum(OD.Quantity) as CantidadVendida, O.ShipCountry from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID where OD.ProductID = 1 group by OD.ProductID, O.ShipCountry order by ProductID) FROM Products as P
+
+
+SELECT P.ProductID, P.ProductName FROM Products as P ORDER BY P.ProductID
+
+select OD.ProductID, sum(OD.Quantity) as CantidadVendida, O.ShipCountry from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID group by OD.ProductID, O.ShipCountry order by ProductID
+
+SELECT P.ProductID, P.ProductName, (select OD.ProductID, sum(OD.Quantity) as CantidadVendida, O.ShipCountry from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID where OD.ProductID = P.ProductID group by OD.ProductID, O.ShipCountry) FROM Products as P
+
+select sum(OD.Quantity) as CantidadVendida from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID group by O.ShipCountry
+
+SELECT P.ProductID, P.ProductName, (select sum(OD.Quantity) as CantidadVendida from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID WHERE P.ProductID = OD.ProductID group by O.ShipCountry) FROM Products as P
+
+select sum(OD.Quantity) as CantidadVendida from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID group by OD.ProductID, O.ShipCountry
+
+select OD.ProductID, sum(OD.Quantity) as CantidadVendida, O.ShipCountry from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID group by OD.ProductID, O.ShipCountry order by ProductID
+
+select OD.ProductID, sum(OD.Quantity) as CantidadVendida, O.ShipCountry from [Order Details] as OD inner join Orders as O on OD.OrderID = O.OrderID group by OD.ProductID, O.ShipCountry order by CantidadVendida desc
 --    Empleados (nombre y apellidos) que trabajan a las órdenes de Andrew Fuller.
 
 

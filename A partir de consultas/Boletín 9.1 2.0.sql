@@ -43,10 +43,34 @@ where CustomerID not in (select Country from Customers where Country like 'Franc
 
 --DÍA 2:
 --    Total de ventas en US$ de productos de cada categoría (nombre de la categoría).
+
+select sum(OD.unitprice), CategoryName 
+from [Order Details] as OD 
+inner join Products as P on OD.ProductID = P.ProductID 
+inner join Categories as C on P.CategoryID = C.CategoryID
+group by CategoryName
+
 --    Total de ventas en US$ de cada empleado cada año (nombre, apellidos, dirección).
+
+--PAsooooo
+
 --    Ventas de cada producto en el año 97. Nombre del producto y unidades.
+
+
+
 --    Cuál es el producto del que hemos vendido más unidades en cada país. *
+
+select distinct  ProductName as [Nombre del producto], max(UnitsOnOrder) as [Número de unidades vendidas], ShipCountry as [Lugar del pedido]
+from Orders as O
+inner join [Order Details] as OD on O.OrderID = OD.OrderID
+inner join Products as P on OD.ProductID = P.ProductID
+group by ShipCountry, ProductName
+
+
 --    Empleados (nombre y apellidos) que trabajan a las órdenes de Andrew Fuller.
+
+select FirstName, LastName from Employees where ReportsTo = 2
+
 --    Número de subordinados que tiene cada empleado, incluyendo los que no tienen ninguno. Nombre, apellidos, ID.
 
 --* Se necesitan subconsultas

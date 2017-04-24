@@ -60,12 +60,17 @@ group by CategoryName
 
 --    Cuál es el producto del que hemos vendido más unidades en cada país. *
 
-select distinct  ProductName as [Nombre del producto], max(UnitsOnOrder) as [Número de unidades vendidas], ShipCountry as [Lugar del pedido]
+-- OJO: IMAGINA QUE QUEREMOS SABER QUÉ CLASE TIENE MÁS ZURDOS. 
+-- PRIMERO TENDRÍAMOS QUE TENER UNA LISTA CON TODOS LOS ZURDOS DE CADA CLASE Y LUEGO CALCULAR EL MÁXIMO DE TODOS (AHÍ LA SUBCONSULTA
+-- PISTA: la columna Quantity es la que almacena las unidades vendidas.
+
+-- ¡¡¡¡HACER DESDE EL PRINCIPIO!!!!
+
+select ProductName as [Nombre del producto], sum(Quantity) as [Número de unidades vendidas], ShipCountry as [Lugar del pedido]
 from Orders as O
 inner join [Order Details] as OD on O.OrderID = OD.OrderID
 inner join Products as P on OD.ProductID = P.ProductID
-group by ShipCountry, ProductName
-
+group by ShipCountry, ProductName;
 
 --    Empleados (nombre y apellidos) que trabajan a las órdenes de Andrew Fuller.
 

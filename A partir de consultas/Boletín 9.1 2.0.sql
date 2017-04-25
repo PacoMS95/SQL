@@ -64,14 +64,28 @@ group by CategoryName
 -- PRIMERO TENDRÍAMOS QUE TENER UNA LISTA CON TODOS LOS ZURDOS DE CADA CLASE Y LUEGO CALCULAR EL MÁXIMO DE TODOS (AHÍ LA SUBCONSULTA
 -- PISTA: la columna Quantity es la que almacena las unidades vendidas.
 
--- ¡¡¡¡HACER DESDE EL PRINCIPIO!!!!
+select max()
 
 select ProductName as [Nombre del producto], sum(Quantity) as [Número de unidades vendidas], ShipCountry as [Lugar del pedido]
 from Orders as O
 inner join [Order Details] as OD on O.OrderID = OD.OrderID
 inner join Products as P on OD.ProductID = P.ProductID
-group by ShipCountry, ProductName;
+group by ShipCountry, ProductName
+--------------------------------------------------------------------------
 
+-- ¡¡¡¡HACER DESDE EL PRINCIPIO!!!!
+
+--    Cuál es el producto del que hemos vendido más unidades en cada país. *
+
+-- Te lo reformulo: cuál es el país que más unidades tiene vendidas de cada producto.
+
+select ProductName, max(Quantity), ShipCountry from Products 
+as P inner join [Order Details] as OD on P.ProductID = OD.ProductID 
+inner join Orders as O on OD.OrderID = O.OrderID where quantity in
+(select sum(Quantity) as [Sumatorio de cantidades por categoría] 
+from [Order Details] group by Quantity) group by ProductName, ShipCountry
+
+---------------------------------------------------------------------------
 --    Empleados (nombre y apellidos) que trabajan a las órdenes de Andrew Fuller.
 
 select FirstName, LastName from Employees where ReportsTo = 2

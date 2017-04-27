@@ -27,8 +27,12 @@ select distinct count(country), ProductName from Customers inner join (...) grou
 --7. Total de ventas (US$) de cada categoría en el año 97.
 
 
-select 
-
+select sum(OD.UnitPrice* OD.Quantity) as [total de Ventas en dollars], C.CategoryName
+from Orders as O inner join [Order Details] as OD on O.OrderID = OD.OrderID
+inner join Products as P on OD.ProductID = P.ProductID 
+inner join Categories as C on P.CategoryID = C.CategoryID
+where year(OrderDate) = '1997'
+group by C.CategoryName
 
 --8. Productos que han comprado más de un cliente del mismo país, indicando el
 --nombre del producto, el país y el número de clientes distintos de ese país que
@@ -36,8 +40,10 @@ select
 
 --9. Total de ventas (US$) en cada país cada año.
 
---10. Producto superventas de cada año, indicando año, nombre del producto,
+--10. Producto superventas (el que más ventas ha tenido) de cada año, indicando año, nombre del producto,
 --categoría y cifra total de ventas.
+
+
 
 --11. Cifra de ventas de cada producto en el año 97 y su aumento o disminución
 --respecto al año anterior en US $ y en %.

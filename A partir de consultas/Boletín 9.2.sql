@@ -26,6 +26,10 @@ select distinct count(country), ProductName from Customers inner join (...) grou
 
 --7. Total de ventas (US$) de cada categoría en el año 97.
 
+
+select 
+
+
 --8. Productos que han comprado más de un cliente del mismo país, indicando el
 --nombre del producto, el país y el número de clientes distintos de ese país que
 --lo han comprado.

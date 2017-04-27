@@ -1,7 +1,6 @@
 use Northwind
 go
 
--- DÍA 1
 --1. Número de clientes de cada país.
 
 select count(CustomerID) as [Número de clientes], Country from Customers group by Country
@@ -13,10 +12,12 @@ inner join Orders as O on C.CustomerID = O.CustomerID inner join [Order Details]
 group by ProductName
 --3. Número de países diferentes en los que se vende cada producto.
 
-select distinct count(country), ProductName from Customers inner join () group by ProductName
+select distinct count(country), ProductName from Customers inner join (...) group by ProductName
 
 --4. Empleados que han vendido alguna vez “Gudbrandsdalsost”, “Lakkalikööri”,
 --“Tourtière” o “Boston Crab Meat”.
+
+
 
 --5. Empleados que no han vendido nunca “Chartreuse verte” ni “Ravioli Angelo”.
 
@@ -29,8 +30,6 @@ select distinct count(country), ProductName from Customers inner join () group b
 --nombre del producto, el país y el número de clientes distintos de ese país que
 --lo han comprado.
 
-
--- DÍA 2
 --9. Total de ventas (US$) en cada país cada año.
 
 --10. Producto superventas de cada año, indicando año, nombre del producto,

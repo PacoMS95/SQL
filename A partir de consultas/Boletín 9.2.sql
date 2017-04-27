@@ -40,10 +40,11 @@ group by C.CategoryName
 
 --9. Total de ventas (US$) en cada país cada año.
 
---10. Producto superventas (el que más ventas ha tenido) de cada año, indicando año, nombre del producto,
---categoría y cifra total de ventas.
+--10. Producto superventas (el que más ventas ha tenido en número)
+-- de cada año, indicando año, nombre del producto,
+-- categoría y cifra total de ventas.
 
-
+select sum(quantity), f from [Order Details] order by 
 
 --11. Cifra de ventas de cada producto en el año 97 y su aumento o disminución
 --respecto al año anterior en US $ y en %.

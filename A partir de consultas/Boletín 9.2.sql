@@ -20,6 +20,11 @@ select distinct count(country), ProductName from Customers inner join (...) grou
 
 
 --5. Empleados que no han vendido nunca “Chartreuse verte” ni “Ravioli Angelo”.
+select * from Employees where EmployeeID not in(select E.EmployeeID from Employees as E 
+inner join Orders as O on E.EmployeeID = O.EmployeeID
+inner join [Order Details] as OD on O.OrderID = OD.OrderID 
+inner join Products as P on OD.ProductID = P.ProductID
+where ProductName like 'Chartreuse verte' or ProductName like 'Ravioli Angelo');
 
 --6. Número de unidades de cada categoría de producto que ha vendido cada
 --empleado.
@@ -44,26 +49,25 @@ group by C.CategoryName
 -- de cada año, indicando año, nombre del producto,
 -- categoría y cifra total de ventas.
 
-go
-
-select sum(quantity) as [Cifra total de ventas], year(OrderDate) 
-as Año, ProductName, CategoryID
-from Products as P inner join [Order Details] as OD on
- P.ProductID = OD.ProductID
-inner join Orders as O on OD.OrderID = O.OrderID
-where quantity in (select OrderID, max(Quantity) as MaxPorProducto from [Order Details]
-					group by OrderID)
-group by ProductName, OrderDate, CategoryID
-Order by Año
-
-
+ --Primero seleccionamos la cantidad por año que hemos vendido de cada producto
 	select ProductID, year(ORD.OrderDate) as annio, sum(Quantity) as cantidad from [Order Details] as OD
 	inner join Orders as ORD on OD.OrderID = ORD.OrderID
 	group by ProductID, year(ORD.OrderDate)
 	order by ProductID, year(ORD.OrderDate)
 
+ --Luego buscamos, entre ellos, el que más ventas ha tenido
+	select ProductID, year(ORD.OrderDate) as annio, sum(Quantity) as cantidad from [Order Details] as OD
+	inner join Orders as ORD on OD.OrderID = ORD.OrderID
+	group by ProductID, year(ORD.OrderDate);
+
+
 --11. Cifra de ventas de cada producto en el año 97 y su aumento o disminución
---respecto al año anterior en US $ y en %.
+--respecto al año anterior en US $ y en %
+
+select count(O.OrderID) as [Cifra de ventas], ProductName, (... PREGUNTAR) as [Diferencia en $] from Orders as O 
+inner join [Order Details] as OD on O.OrderID = OD.OrderID
+inner join Products as P on OD.ProductID = P.ProductID
+where year(OrderDate) = '1997' group by ProductName
 
 --12. Mejor cliente (el que más nos compra) de cada país.
 

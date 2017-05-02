@@ -51,67 +51,29 @@ group by C.CategoryName
 
 select * from [Order Details]
 
-
-select sum(Quantity) totalVentas, ProductName, year(OrderDate) as AnnioDeVenta, CategoryName
+go
+create view VentasPorAnnio as select sum(Quantity) totalVentas, ProductName, year(OrderDate) as AnnioDeVenta, CategoryName
 from Orders as O inner join [Order Details] as OD on O.OrderID = OD.OrderID
 inner join Products as P on OD.ProductID = P.ProductID
 inner join Categories as C on P.CategoryID = C.CategoryID
-group by OrderDate, CategoryName, ProductName
+group by year(OrderDate), CategoryName, ProductName
+-- se te olvidó agrupar por year(OrderDate)
+go
 
+create view Vista2 as select max(totalVentas) as CantidadVendida, AnnioDeVenta 
+from VentasPorAnnio
+group by AnnioDeVenta
+go
 
+select * from VentasPorAnnio as V1
+inner join Vista2 as V2 on V1.AnnioDeVenta = V2.AnnioDeVenta and V1.totalVentas = V2.CantidadVendida
 
-
-
-
-
-
-
-
-
-
-
- --Primero seleccionamos la cantidad por año que hemos vendido de cada producto (recuerda, como obtener 
- --una lista de los alumnos para luego ver cuál de ellos tiene una mayor nota)
-
---select ProductID, year(ORD.OrderDate) as annio, sum(Quantity) as cantidad from [Order Details] as OD
---inner join Orders as ORD on OD.OrderID = ORD.OrderID
---group by ProductID, year(ORD.OrderDate)
---order by ProductID, year(ORD.OrderDate)
-
---Luego buscamos, entre ellos, el que más ventas ha tenido
-
---select ProductID, year(ORD.OrderDate) as annio, sum(Quantity) as cantidad from [Order Details] as OD
---inner join Orders as ORD on OD.OrderID = ORD.OrderID
---group by ProductID, year(ORD.OrderDate)
-
--- Solución de Goumes
-
-SELECT SUM (OD.Quantity) AS Superventas, YEAR (O.OrderDate) AS Año, P.ProductName, P.CategoryID
-	FROM Products AS P
-		INNER JOIN
-		[Order Details] AS OD
-		ON P.ProductID = OD.ProductID
-		INNER JOIN
-		Orders AS O
-		ON OD.OrderID = O.OrderID
-		INNER JOIN
-		(SELECT MAX (TotalVentasAño.TotalVentas) AS MaxVentas, Año
-			FROM (SELECT SUM (OD.Quantity) AS TotalVentas, OD.ProductID, YEAR (O.OrderDate) AS Año
-					FROM [Order Details] AS OD
-						INNER JOIN
-						Orders AS O
-						ON OD.OrderID = O.OrderID
-					GROUP BY YEAR (O.OrderDate), OD.ProductID) AS TotalVentasAño
-				GROUP BY Año ) AS MaxVentasAño
-		ON YEAR (O.OrderDate) = MaxVentasAño.Año
-		GROUP BY MaxVentasAño.MaxVentas, YEAR (O.OrderDate), P.ProductName, P.CategoryID
-HAVING SUM (OD.Quantity) = MaxVentasAño.MaxVentas
-
+-- Se pueden poner varios equals en el on 
 
 --11. Cifra de ventas de cada producto en el año 97 y su aumento o disminución
 --respecto al año anterior en US $ y en %
 
-select count(O.OrderID) as [Cifra de ventas], ProductName, (... PREGUNTAR) as [Diferencia en $] from Orders as O 
+select count(O.OrderID) as [Cifra de ventas], ProductName from Orders as O 
 inner join [Order Details] as OD on O.OrderID = OD.OrderID
 inner join Products as P on OD.ProductID = P.ProductID
 where year(OrderDate) = '1997' group by ProductName

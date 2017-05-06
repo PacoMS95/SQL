@@ -2,13 +2,30 @@
 --Unidad 9. Boletin 4
 
 --Escribe las siguientes consultas sobre la base de datos pubs.
-
+use pubs
+go
 --Pon el enunciado como comentario junta a cada una
 --Consultas
 
 --    Título y tipo de todos los libros en los que alguno de los autores vive en California (CA).
+
+select distinct title, type from titles as t 
+inner join titleauthor as ta on t.title_id = ta.title_id
+inner join authors as a on ta.au_id = a.au_id
+where state = 'CA';
+
+
 --    Título y tipo de todos los libros en los que ninguno de los autores vive en California (CA).
+
+select distinct title, type from titles as t 
+inner join titleauthor as ta on t.title_id = ta.title_id
+inner join authors as a on ta.au_id = a.au_id
+where state != 'CA';
+
 --    Número de libros en los que ha participado cada autor, incluidos los que no han publicado nada.
+
+select count()
+
 --    Número de libros que ha publicado cada editorial, incluidas las que no han publicado ninguno.
 --    Número de empleado de cada editorial.
 --    Calcular la relación entre número de ejemplares publicados y número de empleados de cada editorial, incluyendo el nombre de la misma.

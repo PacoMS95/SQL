@@ -24,13 +24,61 @@ where state != 'CA';
 
 --    Número de libros en los que ha participado cada autor, incluidos los que no han publicado nada.
 
-select count()
+select count(title_id), A.au_id from authors as A
+left join titleauthor as TA on A.au_id=TA.au_id
+group by A.au_id
 
 --    Número de libros que ha publicado cada editorial, incluidas las que no han publicado ninguno.
---    Número de empleado de cada editorial.
---    Calcular la relación entre número de ejemplares publicados y número de empleados de cada editorial, incluyendo el nombre de la misma.
---    Nombre, Apellidos y ciudad de todos los autores que han trabajado para la editorial "Binnet & Hardley” o "Five Lakes Publishing”
---    Empleados que hayan trabajado en alguna editorial que haya publicado algún libro en el que alguno de los autores fuera Marjorie Green o Michael O'Leary.
+
+select count(title_id), pub_name from titles as T
+right join publishers as P on T.pub_id = P.pub_id
+group by pub_name
+
+--    Número de empleados de cada editorial.
+
+select count(emp_id) as [Número de empleados], pub_name from employee as E
+inner join publishers as P on E.pub_id= P.pub_id
+group by pub_name
+
+--Hubiera sido más correcto con un full join, pero la verdad es que da los mismos resultados...
+
+
+Select p.pub_name,
+	   count(e.emp_id) as [Número de empleados]
+from employee as e
+full join publishers as p
+on e.pub_id=p.pub_id
+group by p.pub_name
+
+--    Calcular la relación entre número de ejemplares publicados y 
+-- número de empleados de cada editorial, incluyendo el nombre de la misma.
+
+
+--    Nombre, Apellidos y ciudad de todos los autores que han trabajado para la editorial 
+-- "Binnet & Hardley” o "Five Lakes Publishing”
+
+select au_fname, au_lname, A.city, pub_name from authors as A
+inner join titleauthor as TA on A.au_id = TA.au_id
+inner join titles as T on TA.title_id = T.title_id
+inner join publishers as P on T.pub_id = P.pub_id
+where pub_name in ('Binnet & Hardley' , 'Five Lakes Publishing')
+
+-- Empleados que estén trabajando en alguna editorial que haya publicado 
+-- algún libro en el que alguno de los autores fuera Marjorie Green o Michael O'Leary.
+
+select fname, lname, pub_name from employee as E 
+inner join publishers as P on E.pub_id = P.pub_id
+where pub_id in (select pub_id from publishers where pub)
+
+
+
+
+(select T.title_id from titles as T 
+inner join titleauthor as TA on T.title_id = TA.title_id
+inner join authors as A on TA.au_id=A.au_id
+where au_lname = 'Green' or au_lname = '%Leary');
+
+
 --    Número de ejemplares vendidos de cada libro, especificando el título y el tipo.
 
 --10.  Número de ejemplares de todos sus libros que ha vendido cada autor.

@@ -87,11 +87,12 @@ group by title, type
 
 --10.  Número de ejemplares que ha vendido cada autor de todos sus libros.
 
-select sum() 
+select sum(qty) from sales
 
 --11.  Número de empleados de cada categoría (jobs).
 
---12.  Número de empleados de cada categoría (jobs) que tiene cada editorial, incluyendo aquellas categorías en las que no haya ningún empleado.
+--12.  Número de empleados de cada categoría (jobs) que tiene cada editorial,
+-- incluyendo aquellas categorías en las que no haya ningún empleado.
 
 --13.  Autores que han escrito libros de dos o más tipos diferentes
 

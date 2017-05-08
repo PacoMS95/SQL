@@ -79,9 +79,15 @@ inner join authors as A on TA.au_id=A.au_id
 where au_lname = 'Green' or au_lname = '%Leary');
 
 
---    Número de ejemplares vendidos de cada libro, especificando el título y el tipo.
+-- Número de ejemplares vendidos de cada libro, especificando el título y el tipo.
 
---10.  Número de ejemplares de todos sus libros que ha vendido cada autor.
+select sum(qty) as [numero de ventas], title, type from sales as S
+inner join titles as T on S.title_id = T.title_id
+group by title, type
+
+--10.  Número de ejemplares que ha vendido cada autor de todos sus libros.
+
+select sum() 
 
 --11.  Número de empleados de cada categoría (jobs).
 

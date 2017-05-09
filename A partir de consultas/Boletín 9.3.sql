@@ -87,13 +87,39 @@ group by title, type
 
 --10.  Número de ejemplares que ha vendido cada autor de todos sus libros.
 
-select sum(qty) from sales
+select au_id, sum(qty) as [Cantidad vendida], T.title_id from sales as S
+inner join titles as T on S.title_id = T.title_id
+inner join titleauthor as TA on T.title_id = TA.title_id
+group by au_id, T.title_id
+order by au_id
 
 --11.  Número de empleados de cada categoría (jobs).
+
+select job_desc ,count(emp_id) from employee as E
+inner join jobs as J on E.job_id = J.job_id
+group by job_desc
 
 --12.  Número de empleados de cada categoría (jobs) que tiene cada editorial,
 -- incluyendo aquellas categorías en las que no haya ningún empleado.
 
+--Pasoooo
+
 --13.  Autores que han escrito libros de dos o más tipos diferentes
 
---14.  Empleados que no trabajan en editoriales que han publicado libros cuya columna notes contenga la palabra "and”
+Select a.au_fname,
+	   a.au_lname
+from authors as a
+inner join titleauthor as ta
+on a.au_id=ta.au_id
+inner join titles as t
+on ta.title_id=t.title_id
+group by a.au_fname,a.au_lname
+having count(distinct t.type)>=2 -- este es un ejemplo de count (distinct)
+
+--14.  Empleados que no trabajan en editoriales que han publicado
+-- libros cuya columna notes contenga la palabra "and”
+
+select emp_id from employee except select emp_id from employee as E
+inner join publishers as P on E.pub_id = P.pub_id
+inner join titles as T on P.pub_id = T.pub_id 
+where notes like '%and%'

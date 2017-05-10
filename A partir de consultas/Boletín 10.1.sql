@@ -4,16 +4,22 @@
 use Northwind
 go
 --    Inserta un nuevo cliente.
-select * from Customers
---Sefran te dejó un resumen en el tema 6
 
 insert into Customers (CustomerID, CompanyName)
 values ('QUEPA', 'Quepa Leto & Co')
 
 
---    Véndele (hoy) tres unidades de "Pavlova”, diez de "Inlagd Sill” y 25 de "Filo Mix”. 
--- El distribuidor será Speedy Express y el vendedor Laura Callahan.
+-- Véndele (hoy) tres unidades de "Pavlova”, diez de "Inlagd Sill” y 25 de "Filo Mix”. 
+-- El distribuidor será Speedy Express y el vendedor Laura Callahan. CONSULTAR GOUMES
 
+INSERT INTO Orders (CustomerID, EmployeeID, OrderDate)
+
+
+(SELECT CustomerID, (SELECT EmployeeID
+					FROM Employees
+					WHERE FirstName = 'Laura' AND LastName = 'Callahan'),
+					CURRENT_TIMESTAMP
+FROM Customers WHERE ContactName = 'pepe.java')
 
 
 

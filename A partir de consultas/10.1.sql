@@ -4,10 +4,21 @@
 use Northwind
 go
 --    Inserta un nuevo cliente.
---Sefran te dejó un resumen
+select * from Customers
+--Sefran te dejó un resumen en el tema 6
+
+insert into Customers (CustomerID, CompanyName)
+values ('QUEPA', 'Quepa Leto & Co')
 
 
---    Véndele (hoy) tres unidades de "Pavlova”, diez de "Inlagd Sill” y 25 de "Filo Mix”. El distribuidor será Speedy Express y el vendedor Laura Callahan.
+--    Véndele (hoy) tres unidades de "Pavlova”, diez de "Inlagd Sill” y 25 de "Filo Mix”. 
+-- El distribuidor será Speedy Express y el vendedor Laura Callahan.
+
+
+
+
+
+
 --    Ante la bajada de ventas producida por la crisis, hemos de adaptar nuestros precios según las siguientes reglas:
 --        Los productos de la categoría de bebidas (Beverages) que cuesten más de $10 reducen su precio en un dólar.
 --        Los productos de la categoría Lácteos que cuesten más de $5 reducen su precio en un 10%.

@@ -5,17 +5,24 @@ use Northwind
 go
 --    Inserta un nuevo cliente.
 
-insert into Customers (CustomerID, CompanyName)
-values ('QUEPA', 'Quepa Leto & Co')
+-- DELETE table_or_view FROM table_sources WHERE search_condition 
+delete from dbo.Customers where CustomerID = 'QUEPA'
+
+insert into Customers (CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax)
+values ('QUEPA', 'Quepa Leto & Co', 'Quepa leto', 'Sr. Quepa Leto', 'C/ Huevos cuadrados', 'Paradise City', 'Gansos y rosas', '41701', '666666','49132368')
+
+
 
 
 -- Véndele (hoy) tres unidades de "Pavlova”, diez de "Inlagd Sill” y 25 de "Filo Mix”. 
 -- El distribuidor será Speedy Express y el vendedor Laura Callahan. 
 
--- CONSULTAR GOUMES
+-- CONSULTAR GOUMES SI TIENES DUDAS
 
-INSERT INTO [Order Details] (OrderID, ProductID, UnitPrice, Quantity, Discount) 
-VALUES -- Y aquí me pierdo.
+INSERT INTO Products ()
+VALUES 
+
+-- Y aquí me pierdo.
 
 
 --    Ante la bajada de ventas producida por la crisis, hemos de adaptar nuestros precios según las siguientes reglas:

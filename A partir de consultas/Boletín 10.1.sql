@@ -10,19 +10,12 @@ values ('QUEPA', 'Quepa Leto & Co')
 
 
 -- Véndele (hoy) tres unidades de "Pavlova”, diez de "Inlagd Sill” y 25 de "Filo Mix”. 
--- El distribuidor será Speedy Express y el vendedor Laura Callahan. CONSULTAR GOUMES
+-- El distribuidor será Speedy Express y el vendedor Laura Callahan. 
 
-INSERT INTO Orders (CustomerID, EmployeeID, OrderDate)
+-- CONSULTAR GOUMES
 
-
-(SELECT CustomerID, (SELECT EmployeeID
-					FROM Employees
-					WHERE FirstName = 'Laura' AND LastName = 'Callahan'),
-					CURRENT_TIMESTAMP
-FROM Customers WHERE ContactName = 'pepe.java')
-
-
-
+INSERT INTO [Order Details] (OrderID, ProductID, UnitPrice, Quantity, Discount) 
+VALUES -- Y aquí me pierdo.
 
 
 --    Ante la bajada de ventas producida por la crisis, hemos de adaptar nuestros precios según las siguientes reglas:

@@ -3,12 +3,13 @@
 --Sobre la base de datos LeoMetro
 use LeoMetroV2
 go
-
-select * from LM_Estaciones
---    Crea una función inline que nos devuelva el número de estaciones
+ --Crea una función inline que nos devuelva el número de estaciones
  --que ha recorrido cada tren en un determinado periodo de tiempo.
  --El principio y el fin de ese periodo se pasarán como parámetro
 
+CREATE FUNCTION devolver (lista parámetros)
+RETURNS TABLE AS
+RETURN (SELECT )
 
 
 --    Crea una función inline que nos devuelva el número de veces que cada usuario ha entrado en el metro en un periodo de tiempo. El principio y el fin de ese periodo se pasarán como parámetros
